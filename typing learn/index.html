@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TypeMaster Pro</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>TypeMaster Pro</h1>
+
+        <div class="practice-set-panel">
+            <h2>Practice Sets</h2>
+            <div class="practice-controls">
+                <label for="preset-select">Choose a preset</label>
+                <select id="preset-select"></select>
+            </div>
+            <div class="practice-controls">
+                <label for="custom-text">Or paste custom text</label>
+                <textarea id="custom-text" placeholder="Paste your own practice text here..." rows="5"></textarea>
+                <button id="load-custom-btn">Load Custom Text</button>
+            </div>
+        </div>
+
+        <div id="stats">
+            <p>WPM: <span id="wpm">0</span></p>
+            <p>Accuracy: <span id="accuracy">100</span>%</p>
+        </div>
+
+        <div id="quote-display"></div>
+        <textarea id="input-field" placeholder="Start typing here..." autocomplete="off" rows="5"></textarea>
+
+        <div class="button-row">
+            <button id="reset-btn">Reset</button>
+            <button id="toggle-sound">Sound: ON</button>
+        </div>
+
+        <p id="completion-message"></p>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
