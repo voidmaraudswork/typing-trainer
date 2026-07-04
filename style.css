@@ -1,9 +1,10 @@
 body {
     font-family: 'Roboto Mono', monospace;
-    background-color: #f4f4f9;
+    background-color: #000000;
     display: flex;
     justify-content: center;
     padding-top: 50px;
+    
 }
 .container {
     background: white;
@@ -17,18 +18,23 @@ body {
 .practice-set-panel {
     text-align: left;
     margin-bottom: 1.5rem;
+    
 }
 .practice-set-panel h2 {
     margin-bottom: 0.75rem;
     font-size: 1.15rem;
+    
 }
 .practice-controls {
     margin-bottom: 1rem;
+    
 }
 .practice-controls label {
     display: block;
     margin-bottom: 0.35rem;
     font-weight: 600;
+    
+    
 }
 #quote-display {
     font-size: 1.2rem;
@@ -42,6 +48,8 @@ body {
     border: 1px solid #e0e0e5;
     border-radius: 8px;
     background: #fbfbff;
+    
+    
 }
 .correct { color: #2ecc71; }
 .incorrect { color: #e74c3c; text-decoration: underline; }
@@ -55,6 +63,7 @@ select {
     border-radius: 6px;
     box-sizing: border-box;
     font-family: 'Roboto Mono', monospace;
+    
 }
 .button-row {
     display: flex;
@@ -62,6 +71,7 @@ select {
     justify-content: center;
     flex-wrap: wrap;
     margin-bottom: 1rem;
+    
 }
 button {
     padding: 10px 18px;
@@ -69,26 +79,33 @@ button {
     border: none;
     border-radius: 6px;
     cursor: pointer;
-    background: #3b82f6;
+    background: rgb(155, 0, 145);
     color: white;
+    
 }
 button:hover {
-    background: #2563eb;
+    background: rgb(155, 0, 145);
 }
 #completion-message {
     margin-top: 0.5rem;
     font-size: 1rem;
     font-weight: 700;
+    
 }
 #stats {
     display: flex;
     justify-content: space-around;
     gap: 1rem;
     margin-bottom: 1rem;
+    background-color:rgb(155, 0, 145);
+    border-radius: 10px;
+    
 }
 #stats p {
     margin: 0;
-    font-size: 1rem;
+    font-size: 15px;
+    color: #fbfbff;
+    font-weight: 300;
 }
 #input-field {
     min-height: 120px;
@@ -96,4 +113,31 @@ button:hover {
 .char.newline {
     color: #6b7280;
     font-style: italic;
+    background-color:rgb(155, 0, 145);
+}
+#completion-modal {
+background-color: rgb(155, 0, 145);
+border: #6b7280;
+border-width: 20px;
+border-radius: 20px;
+padding: 10px;
+margin-top: 500px;
+color: #ffffff;
+font-family: 'Times New Roman', Times, serif;
+font-size: 20px;
+}
+
+.container h1{
+    background-color: violet;
+    border-radius: 20px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+#completion-modal button{
+    border: #e4c8ff;
+    border-width: 2px;
+    border-style: solid;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 25px;
+    background-color: rgb(0, 0, 0);
 }

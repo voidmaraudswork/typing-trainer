@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TypeMaster Pro</title>
+    <title>LLOINGEX TYPE MASTER</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="container">
-        <h1>TypeMaster Pro</h1>
+        <h1>LLOINGEX TYPE MASTER</h1>
 
         <div class="practice-set-panel">
             <h2>Practice Sets</h2>
@@ -35,9 +35,23 @@
             <button id="reset-btn" type="button">Reset</button>
             <button id="toggle-sound" type="button">Sound: ON</button>
         </div>
-
-        <p id="completion-message"></p>
     </div>
+
+    <!-- Completion Modal -->
+    <div id="completion-modal" class="modal hidden">
+        <div class="modal-content">
+            <h2 id="modal-title">Results</h2>
+            <div class="modal-stats">
+                <p>WPM: <span id="modal-wpm">0</span></p>
+                <p>Accuracy: <span id="modal-accuracy">100</span>%</p>
+            </div>
+            <p id="modal-message" class="modal-message"></p>
+            <center>
+            <button id="modal-close-btn" type="button">Try Again</button>
+            </center>
+        </div>
+    </div>
+
     <script src="script.js"></script>
 </body>
 </html>

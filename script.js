@@ -7,104 +7,39 @@ const wpmDisplay = document.getElementById('wpm');
 const accuracyDisplay = document.getElementById('accuracy');
 const resetBtn = document.getElementById('reset-btn');
 const soundBtn = document.getElementById('toggle-sound');
-const completionMessage = document.getElementById('completion-message');
+const completionModal = document.getElementById('completion-modal');
+const modalTitle = document.getElementById('modal-title');
+const modalWpm = document.getElementById('modal-wpm');
+const modalAccuracy = document.getElementById('modal-accuracy');
+const modalMessage = document.getElementById('modal-message');
+const modalCloseBtn = document.getElementById('modal-close-btn');
 
 const practiceSets = [
     {
-        title: 'The Classic Flow',
-        text: `The quick brown fox jumps over the lazy dog.
-It is a bright and sunny day in the valley.
-Birds are singing in the tall oak trees now.
-The river flows gently toward the open sea.
-Every moment is a chance to start again fresh.
-Keep moving forward with hope and confidence.`
+        title: 'Touch Typing Fundamentals',
+        text: `The art of touch typing relies on maintaining a consistent rhythm and proper finger placement on the home row keys. By practicing daily, you build the muscle memory required to type without looking down at the keyboard. Precision is the ultimate goal, as accuracy naturally leads to increased speed over time.`
     },
     {
-        title: 'Focus on Rhythm',
-        text: `Type slowly to ensure that every key is hit.
-Accuracy is much more important than speed now.
-Take a deep breath and relax your shoulders.
-Find a steady pace that feels natural to you.
-Your fingers will learn the path with practice.
-Consistency is the key to mastering this skill.`
+        title: 'Posture and Comfort',
+        text: `Focusing on your posture while you work can help prevent fatigue and improve your overall typing efficiency during long sessions. Keep your wrists in a neutral position and ensure that your screen is at eye level for better comfort. A relaxed body allows your fingers to move more fluidly across the keys.`
     },
     {
-        title: 'Technology & Innovation',
-        text: `Programming is like writing a story in code.
-Every line brings a new idea to digital life.
-Computers are tools that expand our horizons.
-The future is being built by curious minds.
-Solve problems one small step at a time here.
-Persistence makes the hard challenges simpler.`
+        title: 'Technology and Productivity',
+        text: `Technology has changed the way we write and communicate, making keyboard proficiency an essential skill in the modern world. Whether you are typing a quick message or a long report, speed and accuracy save valuable time. Consistent practice will help you master the layout and boost your daily productivity.`
     },
     {
-        title: 'Nature and Serenity',
-        text: `Green forests stretch across the rolling hills.
-The mountain air feels cool against the skin.
-Watching the sunset brings a sense of peace.
-Stars begin to twinkle in the velvet sky soon.
-The night is quiet and full of soft whispers.
-Nature is the best place to find your calm.`
+        title: 'Focus and Flow',
+        text: `Finding a quiet environment to practice can significantly improve your ability to concentrate on the rhythm of your keystrokes. Minimizing distractions allows you to enter a state of flow where the words seem to appear on the screen effortlessly. Take small breaks to stretch your hands and keep your mind fresh.`
     },
     {
-        title: 'Professional Growth',
-        text: `Set clear goals for every day of the week.
-Hard work leads to steady personal progress.
-Stay focused on the tasks that matter today.
-Collaboration helps teams reach greater heights.
-Listen well to learn from everyone you meet.
-Success is a journey of constant discovery.`
-    },
-    {
-        title: 'Creative Writing',
-        text: `A mysterious map was found in the attic dust.
-It showed the way to a hidden golden valley.
-Adventure awaits those who dare to seek it.
-The path is winding and full of surprises.
-Grab your gear and head into the wild unknown.
-Every journey changes who you are inside.`
-    },
-    {
-        title: 'Daily Habits',
-        text: `Start your morning with a glass of water now.
-Write down three things you are grateful for.
-Spend some time reading a book you enjoy.
-Exercise helps to keep your body feeling fit.
-Plan your tasks to stay organized and calm.
-End the day with a grateful heart and rest.`
-    },
-    {
-        title: 'Learning and Wisdom',
-        text: `Knowledge is a treasure that stays with you.
-Read widely to understand the diverse world.
-Ask questions whenever you do not understand.
-Mistakes are just lessons in disguise today.
-Keep an open mind as you face new challenges.
-Wisdom comes from years of learning and life.`
-    },
-    {
-        title: 'Abstract Thoughts',
-        text: `Time moves in ways we cannot always control.
-Memories are the threads of our past stories.
-Change is the only constant in this universe.
-Embrace the beauty of the present moment now.
-Light and shadow dance across the gray walls.
-Life is a beautiful puzzle to solve daily.`
-    },
-    {
-        title: 'Velocity Drills',
-        text: `The blue sky looks clear and very wide today.
-Bring the snacks for the long trip home soon.
-Always look ahead when driving on the road.
-Practice helps you type faster than you think.
-Keep your eyes on the screen at all times.
-You are doing a great job with these drills.`
+        title: 'Progress and Persistence',
+        text: `Every successful typist began as a beginner who had to learn the position of each individual letter on the board. Do not be discouraged by initial mistakes; they are simply part of the learning process. With dedication and regular drills, you will soon find yourself typing faster and more accurately.`
     }
 ];
 
 let sampleText = '';
 let soundEnabled = true;
-const clickSound = new Audio('assets/key-click.mp3');
+const clickSound = new Audio('assets/key-click.wav');
 let startTime = null;
 let errors = 0;
 
@@ -113,7 +48,7 @@ function normalizeText(text) {
 }
 
 function renderText(text) {
-    sampleText = normalizeText(text);
+    sampleText = text.replace(/\n\s+/g, '\n').trim();
     quoteDisplay.innerHTML = '';
 
     sampleText.split('').forEach(char => {
@@ -161,7 +96,6 @@ function loadCustomText() {
 function clearStats() {
     wpmDisplay.innerText = '0';
     accuracyDisplay.innerText = '100';
-    completionMessage.innerText = '';
 }
 
 function init() {
@@ -169,6 +103,7 @@ function init() {
     startTime = null;
     errors = 0;
     clearStats();
+    completionModal.classList.add('hidden');
 
     quoteDisplay.querySelectorAll('span').forEach(span => {
         span.classList.remove('correct', 'incorrect');
@@ -177,10 +112,33 @@ function init() {
 }
 
 function getCompletionMessage(wpm, accuracy) {
-    if (accuracy >= 90 && wpm >= 40) return 'Good job bruhh..';
-    if (accuracy >= 80 && wpm >= 30) return 'Good';
-    if (accuracy >= 50 && wpm >= 20) return 'So bad';
-    return 'Keep practicing.';
+    if (accuracy >= 100 && wpm >= 75) return 'Good job..4.5/5';
+    if (accuracy >= 100 && wpm >= 60) return 'Good job..4/5';
+    if (accuracy >= 90 && wpm >= 50) return 'Good job..3.5/5';
+    if (accuracy >= 90 && wpm >= 40) return 'Good job..3/5';
+    if (accuracy >= 80 && wpm >= 30) return 'Good..2.5/5';
+    if (accuracy >= 50 && wpm >= 20) return 'bad..1/5';
+    return 'so bad 0.5/5';
+}
+
+function showCompletionModal(wpm, accuracy) {
+    const message = getCompletionMessage(wpm, accuracy);
+    
+    modalWpm.innerText = wpm;
+    modalAccuracy.innerText = accuracy;
+    modalMessage.innerText = message;
+    
+    // Set message color based on performance
+    modalMessage.classList.remove('excellent', 'good', 'bad');
+    if (accuracy >= 90 && wpm >= 45) {
+        modalMessage.classList.add('excellent');
+    } else if (accuracy >= 80 && wpm >= 30) {
+        modalMessage.classList.add('good');
+    } else {
+        modalMessage.classList.add('bad');
+    }
+    
+    completionModal.classList.remove('hidden');
 }
 
 function updateStats() {
@@ -222,9 +180,7 @@ function updateStats() {
     accuracyDisplay.innerText = accuracy;
 
     if (typedChars === sampleText.length) {
-        completionMessage.innerText = getCompletionMessage(wpm, accuracy);
-    } else {
-        completionMessage.innerText = '';
+        showCompletionModal(wpm, accuracy);
     }
 }
 
@@ -240,6 +196,7 @@ presetSelect.addEventListener('change', () => {
 
 loadCustomBtn.addEventListener('click', loadCustomText);
 resetBtn.addEventListener('click', init);
+modalCloseBtn.addEventListener('click', init);
 
 inputField.addEventListener('input', () => {
     if (!startTime) {
