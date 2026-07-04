@@ -39,7 +39,8 @@ const practiceSets = [
 
 let sampleText = '';
 let soundEnabled = true;
-const clickSound = new Audio('assets/key-click.wav');
+const clickSound = new Audio('./assets/key-click.mp3');
+clickSound.preload = 'auto';
 let startTime = null;
 let errors = 0;
 
