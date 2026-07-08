@@ -113,11 +113,13 @@ function init() {
 }
 
 function getCompletionMessage(wpm, accuracy) {
-    if (accuracy >= 100 && wpm >= 75) return 'Good job..4.5/5';
-    if (accuracy >= 100 && wpm >= 60) return 'Good job..4/5';
+    if (accuracy >= 100 && wpm >= 95) return 'Fabulous..4.9/5';
+    if (accuracy >= 100 && wpm >= 75) return 'Awesome..4.5/5';
+    if (accuracy >= 100 && wpm >= 60) return 'Great..4/5';
     if (accuracy >= 90 && wpm >= 50) return 'Good job..3.5/5';
     if (accuracy >= 90 && wpm >= 40) return 'Good job..3/5';
     if (accuracy >= 80 && wpm >= 30) return 'Good..2.5/5';
+    if (accuracy >= 100 && wpm >= 31) return 'Good..3/5';
     if (accuracy >= 50 && wpm >= 20) return 'bad..1/5';
     return 'so bad 0.5/5';
 }
